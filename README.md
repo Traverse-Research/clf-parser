@@ -33,7 +33,7 @@ Add this to your Cargo.toml:
 clf-parser = "0.1.0"
 ```
 
-```rust
+```rust,no_run
 fn main() -> anyhow::Result<()> {
     let reader = std::fs::OpenOptions::new().read(true).open("my_file.clf")?;
     let clf = clf_parser::load_clf(reader)?;
