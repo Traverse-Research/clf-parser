@@ -1,4 +1,4 @@
-# clf-parser title
+# Common LUT Format (CLF) parser
 
 [![Actions Status](https://github.com/Traverse-Research/clf-parser/actions/workflows/ci.yml/badge.svg)](https://github.com/Traverse-Research/clf-parser/actions)
 [![Latest version](https://img.shields.io/crates/v/clf-parser.svg?logo=rust)](https://crates.io/crates/clf-parser)
@@ -10,7 +10,19 @@
 
 [![Banner](banner.png)](https://traverseresearch.nl)
 
-TODO: Write a description
+https://docs.acescentral.com/specifications/clf
+
+## Supported features
+
+### Operators
+
+- LUT1D
+- LUT3D
+- Range
+
+### Bit depths
+
+- `32F`
 
 ## Usage
 
@@ -22,5 +34,9 @@ clf-parser = "0.0.0"
 ```
 
 ```rust
-// A code example
+fn main() -> anyhow::Result<()> {
+    let reader = std::fs::OpenOptions::new().read(true).open("my_file.clf")?;
+    let clf = clf_parser::load_clf(reader)?;
+    Ok(())
+}
 ```
