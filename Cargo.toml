@@ -1,10 +1,20 @@
 [package]
-name = "rust-template"
+name = "clf-parser"
+description = "Common LUT Format (CLF) parser"
 version = "0.0.0"
 authors = ["Traverse Research <support@traverseresearch.nl>"]
 edition = "2021"
 license = "MIT"
 homepage = "https://traverseresearch.nl"
-repository = "https://github.com/Traverse-Research/rust-template"
-description = "A useful description"
+repository = "https://github.com/Traverse-Research/clf-parser"
 include = ["src", "LICENSE", "CONTRIBUTING.md"]
+keywords = ["aces"]
+# https://crates.io/category_slugs
+categories = ["graphics"]
+
+[dependencies]
+anyhow = { version = "1.0", default-features = false, features = ["std"] }
+bytecheck = { version = "0.7", default-features = false }
+rkyv = { version = "0.7", default-features = false, features = ["size_64", "validation"] }
+serde-xml-rs = { version = "0.6", default-features = false }
+serde = { version = "1", default-features = false, features = ["derive"] }
