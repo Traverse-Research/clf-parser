@@ -39,6 +39,11 @@ jobs:
       - uses: dtolnay/rust-toolchain@nightly
       - name: Generate minimal-version dependencies
         run: cargo -Zminimal-versions generate-lockfile
+      - name: Fixup minimal versions in broken crates
+        run: |
+          # Crates like serde-xml-rs don't test their minimal-versions
+          cargo update -p log --precise 0.4.4
+          cargo update -p thiserror --precise 1.0.2
       - uses: dtolnay/rust-toolchain@1.74.0
       - name: Cargo check
         run: cargo check --workspace --all-targets --no-default-features ${{ matrix.features }}
