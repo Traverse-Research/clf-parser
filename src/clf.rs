@@ -1,17 +1,12 @@
 use crate::deserialize::deserialize_space_separated;
 use anyhow::{bail, ensure, Context, Result};
 
-#[derive(
-    Debug,
-    serde::Deserialize,
-    rkyv::Archive,
-    rkyv::Serialize,
-    rkyv::Deserialize,
-    PartialEq,
-    Clone,
-    Copy,
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, serde::Deserialize)]
+#[cfg_attr(
+    feature = "rkyv",
+    derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize),
+    archive_attr(derive(bytecheck::CheckBytes))
 )]
-#[archive_attr(derive(bytecheck::CheckBytes))]
 pub enum BitDepth {
     #[serde(rename = "8i")]
     I8,
@@ -27,10 +22,12 @@ pub enum BitDepth {
     F32,
 }
 
-#[derive(
-    Debug, serde::Deserialize, rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, PartialEq,
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, serde::Deserialize)]
+#[cfg_attr(
+    feature = "rkyv",
+    derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize),
+    archive_attr(derive(bytecheck::CheckBytes))
 )]
-#[archive_attr(derive(bytecheck::CheckBytes))]
 #[serde(rename_all = "camelCase")]
 pub struct OperatorBitDepth {
     in_bit_depth: BitDepth,
@@ -47,8 +44,12 @@ impl OperatorBitDepth {
     }
 }
 
-#[derive(Debug, serde::Deserialize, rkyv::Archive, rkyv::Serialize, rkyv::Deserialize)]
-#[archive_attr(derive(bytecheck::CheckBytes))]
+#[derive(Clone, Debug, PartialEq, serde::Deserialize)]
+#[cfg_attr(
+    feature = "rkyv",
+    derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize),
+    archive_attr(derive(bytecheck::CheckBytes))
+)]
 pub struct Array {
     #[serde(deserialize_with = "deserialize_space_separated")]
     pub dim: Vec<u32>,
@@ -60,8 +61,12 @@ pub struct Array {
 ///
 /// <https://docs.acescentral.com/specifications/clf#range>
 /// <https://github.com/AcademySoftwareFoundation/OpenColorIO/blob/9078753990d7f976a0bfcd55cfa63f2e1de3a53b/src/OpenColorIO/ops/range/RangeOpData.cpp#L474>
-#[derive(Debug, serde::Deserialize, rkyv::Archive, rkyv::Serialize, rkyv::Deserialize)]
-#[archive_attr(derive(bytecheck::CheckBytes))]
+#[derive(Clone, Copy, Debug, PartialEq, serde::Deserialize)]
+#[cfg_attr(
+    feature = "rkyv",
+    derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize),
+    archive_attr(derive(bytecheck::CheckBytes))
+)]
 #[serde(rename_all = "camelCase")]
 pub struct Range {
     #[serde(flatten)]
@@ -82,8 +87,12 @@ impl Range {
     }
 }
 
-#[derive(Debug, serde::Deserialize, rkyv::Archive, rkyv::Serialize, rkyv::Deserialize)]
-#[archive_attr(derive(bytecheck::CheckBytes))]
+#[derive(Clone, Debug, PartialEq, serde::Deserialize)]
+#[cfg_attr(
+    feature = "rkyv",
+    derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize),
+    archive_attr(derive(bytecheck::CheckBytes))
+)]
 #[serde(rename = "camelCase")]
 pub struct Lut1d {
     #[serde(flatten)]
@@ -111,8 +120,12 @@ impl Lut1d {
     }
 }
 
-#[derive(Debug, serde::Deserialize, rkyv::Archive, rkyv::Serialize, rkyv::Deserialize)]
-#[archive_attr(derive(bytecheck::CheckBytes))]
+#[derive(Clone, Debug, PartialEq, serde::Deserialize)]
+#[cfg_attr(
+    feature = "rkyv",
+    derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize),
+    archive_attr(derive(bytecheck::CheckBytes))
+)]
 #[serde(rename_all = "camelCase")]
 pub struct Lut3d {
     #[serde(flatten)]
@@ -147,8 +160,12 @@ impl Lut3d {
     }
 }
 
-#[derive(Debug, serde::Deserialize, rkyv::Archive, rkyv::Serialize, rkyv::Deserialize)]
-#[archive_attr(derive(bytecheck::CheckBytes))]
+#[derive(Clone, Debug, PartialEq, serde::Deserialize)]
+#[cfg_attr(
+    feature = "rkyv",
+    derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize),
+    archive_attr(derive(bytecheck::CheckBytes))
+)]
 #[serde(rename_all = "camelCase")]
 pub struct ProcessList {
     #[serde(rename = "compCLFversion")]
@@ -175,8 +192,12 @@ impl ProcessList {
     }
 }
 
-#[derive(Debug, serde::Deserialize, rkyv::Archive, rkyv::Serialize, rkyv::Deserialize)]
-#[archive_attr(derive(bytecheck::CheckBytes))]
+#[derive(Clone, Debug, PartialEq, serde::Deserialize)]
+#[cfg_attr(
+    feature = "rkyv",
+    derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize),
+    archive_attr(derive(bytecheck::CheckBytes))
+)]
 #[serde(deny_unknown_fields)]
 pub enum Operator {
     Range(Range),
