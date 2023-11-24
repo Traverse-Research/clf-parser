@@ -7,7 +7,7 @@ edition = "2021"
 license = "MIT"
 homepage = "https://traverseresearch.nl"
 repository = "https://github.com/Traverse-Research/clf-parser"
-include = ["src", "LICENSE", "CONTRIBUTING.md"]
+include = ["src", "LICENSE"]
 keywords = ["aces"]
 # https://crates.io/category_slugs
 categories = ["graphics"]
