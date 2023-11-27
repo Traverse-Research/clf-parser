@@ -14,7 +14,7 @@ categories = ["graphics"]
 
 [dependencies]
 anyhow = { version = "1.0.1", default-features = false, features = ["std"] }
-bytecheck = { version = "0.6", default-features = false }
+bytecheck = { version = "0.7", default-features = false }
 rkyv = { version = "0.7.40", optional = true, default-features = false, features = ["size_64", "validation"] }
 serde = { version = "1.0.103", default-features = false, features = ["derive"] }
 serde-xml-rs = { version = "0.6", default-features = false }
