@@ -37,8 +37,8 @@ pub struct OperatorBitDepth {
 impl OperatorBitDepth {
     fn validate(&self) -> Result<()> {
         ensure!(
-            self.in_bit_depth != self.out_bit_depth || self.out_bit_depth != BitDepth::F32,
-            "currently only BitDepth::F32 is supported"
+            self.in_bit_depth == self.out_bit_depth && self.out_bit_depth == BitDepth::F32,
+            "currently only BitDepth::F32 is supported, found in bit depth: {:?}, out bit depth: {:?}", self.in_bit_depth, self.out_bit_depth
         );
         Ok(())
     }
@@ -106,7 +106,10 @@ impl Lut1d {
         self.bit_depth.validate()?;
 
         if self.array.dim.len() != 2 {
-            bail!("A dim attribute defined for a Lut1d should have 2 elements.")
+            bail!(
+                "A dim attribute defined for a Lut1d should have 2 elements; {} were found instead.",
+                self.array.dim.len()
+            )
         }
 
         if self.array.dim.iter().product::<u32>() != self.array.data.len() as u32 {
@@ -140,13 +143,19 @@ impl Lut3d {
 
         if self.array.dim.len() == 4 {
             if self.array.dim[0] != self.array.dim[1] || self.array.dim[0] != self.array.dim[2] {
-                bail!("A Lut3d should have the same dimensions on all three axes.")
+                bail!(
+                    "A Lut3d should have the same dimensions on all three axes. Found {:?} instead.",
+                    self.array.dim
+                )
             }
             if self.array.dim[3] != 3 {
-                bail!("A Lut3d should have 3 color components.")
+                bail!(
+                    "A Lut3d should have 3 color components; {} were found instead.",
+                    self.array.dim[3]
+                )
             }
         } else {
-            bail!("A dim attribute defined for a Lut3D should have 4 elements.")
+            bail!("A dim attribute defined for a Lut3D should have 4 elements; {} were found instead.", self.array.dim.len())
         }
 
         if self.array.dim.iter().product::<u32>() != self.array.data.len() as u32 {
