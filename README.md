@@ -30,7 +30,7 @@ Add this to your Cargo.toml:
 
 ```toml
 [dependencies]
-clf-parser = "0.1.0"
+clf-parser = "0.2.0"
 ```
 
 ```rust,no_run
