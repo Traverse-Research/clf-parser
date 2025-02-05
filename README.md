@@ -10,7 +10,13 @@
 
 [![Banner](banner.png)](https://traverseresearch.nl)
 
+A Common LUT Format (CLF) file can include a series of color operators that transform color values between different color spaces. CLFs can be created with OpenColorIO and integrated into your application to manage color workflows.
+
+Currently, this parser does not implement all operators specified in the standard. If you need additional operators, feel free to open an issue or submit a pull request.
+
 https://docs.acescentral.com/specifications/clf
+
+https://github.com/AcademySoftwareFoundation/OpenColorIO
 
 ## Supported features
 
