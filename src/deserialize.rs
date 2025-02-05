@@ -26,7 +26,7 @@ where
         }
     }
 
-    impl<'de, T> Visitor<'de> for ArrayVisitor<T>
+    impl<T> Visitor<'_> for ArrayVisitor<T>
     where
         T: FromStr,
         T::Err: fmt::Display,
