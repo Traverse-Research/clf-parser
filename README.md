@@ -24,6 +24,8 @@ https://github.com/AcademySoftwareFoundation/OpenColorIO
 
 - LUT1D
 - LUT3D
+- Log (one `LogParams` element for all channels)
+- Matrix
 - Range
 
 ### Bit depths
