@@ -4,6 +4,7 @@ description = "Common LUT Format (CLF) parser"
 version = "0.2.0"
 authors = ["Traverse Research <support@traverseresearch.nl>"]
 edition = "2021"
+rust-version = "1.74"
 license = "MIT"
 homepage = "https://traverseresearch.nl"
 repository = "https://github.com/Traverse-Research/clf-parser"
@@ -13,7 +14,7 @@ keywords = ["aces"]
 categories = ["graphics"]
 
 [dependencies]
-anyhow = { version = "1.0.1", default-features = false, features = ["std"] }
+anyhow = { version = "1.0.4", default-features = false, features = ["std"] }
 bytecheck = { version = "0.6", default-features = false }
 rkyv = { version = "0.7.40", optional = true, default-features = false, features = ["size_64", "validation"] }
 serde = { version = "1.0.217", default-features = false, features = ["derive"] }
