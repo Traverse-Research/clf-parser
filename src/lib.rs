@@ -173,4 +173,24 @@ mod tests {
         );
         assert!(error.contains("noClamp Range"), "{error}");
     }
+
+    #[test]
+    fn rejects_matrix_with_too_few_values() {
+        let error = load_error(
+            r#"<Matrix inBitDepth="32f" outBitDepth="32f">
+                <Array dim="3 3">1 0 0 0 1 0 0 0</Array>
+            </Matrix>"#,
+        );
+        assert!(error.contains("expected 9 elements, got 8"), "{error}");
+    }
+
+    #[test]
+    fn rejects_3x4_matrix_with_3x3_values() {
+        let error = load_error(
+            r#"<Matrix inBitDepth="32f" outBitDepth="32f">
+                <Array dim="3 4">1 0 0 0 1 0 0 0 1</Array>
+            </Matrix>"#,
+        );
+        assert!(error.contains("expected 12 elements, got 9"), "{error}");
+    }
 }

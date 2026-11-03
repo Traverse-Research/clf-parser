@@ -273,6 +273,14 @@ impl Matrix {
             "The CLF specification states that only 3x3 or 3x4 matrices are supported."
         );
 
+        if self.array.dim.iter().product::<u32>() != self.array.data.len() as u32 {
+            bail!(
+                "expected {} elements, got {}",
+                self.array.dim.iter().product::<u32>(),
+                self.array.data.len()
+            )
+        }
+
         Ok(())
     }
 }
